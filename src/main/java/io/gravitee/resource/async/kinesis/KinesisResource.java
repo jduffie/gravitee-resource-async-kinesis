@@ -16,11 +16,15 @@
 package io.gravitee.resource.async.kinesis;
 
 import io.gravitee.resource.api.AbstractConfigurableResource;
+import io.gravitee.resource.async.api.AsyncResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 
 @SuppressWarnings("unused")
-public class KinesisResource extends AbstractConfigurableResource<KinesisResourceConfiguration> {
+public class KinesisResource extends AsyncResource<KinesisResourceConfiguration> implements ApplicationContextAware {
 
     private final Logger LOGGER = LoggerFactory.getLogger(KinesisResource.class);
 
@@ -34,5 +38,10 @@ public class KinesisResource extends AbstractConfigurableResource<KinesisResourc
     protected void doStop() throws Exception{
         super.doStop();
         LOGGER.info("Stop: " + configuration().getStringParam());
+    }
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+
     }
 }
