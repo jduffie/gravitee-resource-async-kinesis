@@ -31,13 +31,13 @@ public class KinesisResource extends AsyncResource<KinesisResourceConfiguration>
     @Override
     protected void doStart() throws Exception{
         super.doStart();
-        LOGGER.info("Start: " + configuration().getStringParam());
+        LOGGER.info("Start: " + configuration().toString());
     }
 
     @Override
     protected void doStop() throws Exception{
         super.doStop();
-        LOGGER.info("Stop: " + configuration().getStringParam());
+        LOGGER.info("Stop: " + configuration().toString());
     }
 
     @Override

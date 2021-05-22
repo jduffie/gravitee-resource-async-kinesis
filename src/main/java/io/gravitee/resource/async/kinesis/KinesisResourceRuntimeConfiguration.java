@@ -17,14 +17,15 @@ package io.gravitee.resource.async.kinesis;
 
 import io.gravitee.resource.api.ResourceConfiguration;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
 
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class KinesisResourceConfiguration implements ResourceConfiguration {
+public class KinesisResourceRuntimeConfiguration implements ResourceConfiguration {
 
     private PolicyScope scope = PolicyScope.REQUEST;
-
     private String streamName;
     private String regionName;
     private String awsAccessKeyId;
