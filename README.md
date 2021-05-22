@@ -1,0 +1,1 @@
+# gravitee-resource-async-kinesis
