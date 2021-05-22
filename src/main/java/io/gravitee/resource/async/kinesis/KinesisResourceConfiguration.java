@@ -15,24 +15,22 @@
  */
 package io.gravitee.resource.async.kinesis;
 
-import io.gravitee.resource.api.AbstractConfigurableResource;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import io.gravitee.resource.api.ResourceConfiguration;
 
-@SuppressWarnings("unused")
-public class KinesisResourceResource extends AbstractConfigurableResource<KinesisResourceResourceConfiguration> {
+public class KinesisResourceConfiguration implements ResourceConfiguration {
 
-    private final Logger LOGGER = LoggerFactory.getLogger(KinesisResourceResource.class);
+    /**
+     * A String parameter
+     */
+    private String stringParam = "defaultValue";
 
-    @Override
-    protected void doStart() throws Exception{
-        super.doStart();
-        LOGGER.info("Start: " + configuration().getStringParam());
+    /**
+     * Get the String parameter
+     *
+     * @return the String parameter
+     */
+    public String getStringParam() {
+        return stringParam;
     }
 
-    @Override
-    protected void doStop() throws Exception{
-        super.doStop();
-        LOGGER.info("Stop: " + configuration().getStringParam());
-    }
 }

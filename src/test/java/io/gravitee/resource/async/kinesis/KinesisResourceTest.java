@@ -17,7 +17,7 @@ package io.gravitee.resource.async.kinesis;
 
 import org.junit.Test;
 
-public class KinesisResourceResourceTest {
+public class KinesisResourceTest {
 
     @Test
     public void testOnStart() throws Exception {
