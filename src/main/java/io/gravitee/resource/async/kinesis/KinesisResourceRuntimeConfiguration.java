@@ -24,7 +24,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class KinesisResourceRuntimeConfiguration implements ResourceConfiguration {
-
     private PolicyScope scope = PolicyScope.REQUEST;
     private String streamName;
     private String regionName;

@@ -15,33 +15,53 @@
  */
 package io.gravitee.resource.async.kinesis;
 
-import io.gravitee.resource.api.AbstractConfigurableResource;
+import com.amazonaws.auth.AWSStaticCredentialsProvider;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.services.kinesis.producer.KinesisProducer;
+import com.amazonaws.services.kinesis.producer.KinesisProducerConfiguration;
+import com.amazonaws.services.kinesis.producer.UserRecordResult;
+import io.gravitee.gateway.api.handler.Handler;
+import io.gravitee.resource.async.api.AsyncHash;
+import io.gravitee.resource.async.api.AsyncMessage;
 import io.gravitee.resource.async.api.AsyncResource;
+import io.gravitee.resource.async.api.AsyncResourceResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeansException;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 
 @SuppressWarnings("unused")
-public class KinesisResource extends AsyncResource<KinesisResourceConfiguration> implements ApplicationContextAware {
+public class KinesisResource extends AsyncResource<KinesisResourceConfiguration, UserRecordResult> {
+    private static final Logger LOGGER = LoggerFactory.getLogger(KinesisResource.class);
 
-    private final Logger LOGGER = LoggerFactory.getLogger(KinesisResource.class);
+    private KinesisProducer kinesisProducer;
+    private KinesisResourceRuntimeConfiguration runtimeConfiguration;
 
     @Override
-    protected void doStart() throws Exception{
+    protected void doStart() throws Exception {
         super.doStart();
-        LOGGER.info("Start: " + configuration().toString());
+        LOGGER.info("Initializing resource");
+        this.runtimeConfiguration = KinesisResourceRuntimeConfigurationUtil.getRuntimeConfiguration(null, configuration());
+        this.kinesisProducer = createProducer(this.runtimeConfiguration);
     }
 
     @Override
-    protected void doStop() throws Exception{
+    protected void doStop() throws Exception {
         super.doStop();
-        LOGGER.info("Stop: " + configuration().toString());
+        LOGGER.info("Destroying resource");
     }
 
     @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-
+    public void publish(AsyncMessage asyncMessage, AsyncHash asyncHash, Handler<AsyncResourceResult> handler) {
+        LOGGER.info("publishing");
     }
+
+    private static KinesisProducer createProducer(KinesisResourceRuntimeConfiguration kinesisPolicyConfiguration) {
+        BasicAWSCredentials awsCreds = new BasicAWSCredentials(kinesisPolicyConfiguration.getAwsAccessKeyId(),
+                kinesisPolicyConfiguration.getAwsSecretAccessKey());
+        KinesisProducerConfiguration kinesisProducerConfiguration = new KinesisProducerConfiguration();
+        kinesisProducerConfiguration
+                .setRegion(kinesisPolicyConfiguration.getRegionName())
+                .setCredentialsProvider(new AWSStaticCredentialsProvider(awsCreds));
+        return new KinesisProducer(kinesisProducerConfiguration);
+    }
+
 }
