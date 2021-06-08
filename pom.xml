@@ -159,4 +159,36 @@
         </plugins>
     </build>
 
+    <profiles>
+        <profile>
+            <id>manual-schema-gen</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>io.gravitee.maven.plugins</groupId>
+                        <artifactId>json-schema-generator-maven-plugin</artifactId>
+                        <version>${json-schema-generator-maven-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>generate-json-schemas</goal>
+                                </goals>
+                                <phase>prepare-package</phase>
+                                <configuration>
+                                    <includes>
+                                        <include>io/gravitee/resource/async/kinesis/KinesisResourceConfiguration</include>
+                                    </includes>
+                                    <outputDirectory>${json-schema-generator-maven-plugin.outputDirectory}</outputDirectory>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
 </project>
