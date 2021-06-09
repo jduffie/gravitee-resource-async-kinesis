@@ -3,23 +3,23 @@
   "id" : "urn:jsonschema:io:gravitee:resource:async:kinesis:KinesisResourceConfiguration",
   "properties" : {
     "streamName" : {
-      "title": "Stream Name",
-      "description": "stream name",
+      "title": "AWS Kinesis Stream Name",
+      "description": "Name of the AWS Kinesis stream.",
       "type": "string"
     },
     "regionName" : {
-      "title": "regionName Name",
-      "description": "regionName name",
+      "title": "AWS region name",
+      "description": "AWS Region where the Kinesis stream is hosted.",
       "type": "string"
     },
     "awsAccessKeyId" : {
-      "title": "awsAccessKeyId Name",
-      "description": "awsAccessKeyId name",
+      "title": "AWS Access Key Id",
+      "description": "Access key for IAM account with privileges to write to the Kinesis stream.",
       "type": "string"
     },
     "awsSecretAccessKey" : {
-      "title": "awsSecretAccessKey Name",
-      "description": "awsSecretAccessKey name",
+      "title": "AWS Secret Access Key",
+      "description": "Secret key for IAM account with privileges to write to the Kinesis stream.",
       "type": "string",
       "x-schema-form": {
         "type": "password"

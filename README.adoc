@@ -1,8 +1,82 @@
-= ${policyName} Gravitee Policy
+= AWS Kinesis Async Producer Client
 
 ifdef::env-github[]
 image:https://ci.gravitee.io/buildStatus/icon?job=gravitee-io/gravitee-resource-async-kinesis/master["Build status", link="https://ci.gravitee.io/job/gravitee-io/job/gravitee-resource-async-kinesis/"]
 image:https://badges.gitter.im/Join Chat.svg["Gitter", link="https://gitter.im/gravitee-io/gravitee-io?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge"]
 endif::[]
 
-Here you can document your ${policyName} Gravitee Policy.
+== Description
+
+
+== Pre-Requisites
+Prior to creating the resource:
+
+* Create the AWS Kinesis Stream
+* Collect the credentials required to write to the stream
+
+=== Stream Create:
+You can create the stream either via the console:
+    https://console.aws.amazon.com/kinesis
+
+or the CLI:
+----
+   STREAM_NAME=my_test_stream
+
+   # create
+   aws kinesis create-stream --stream-name $STREAM_NAME  --shard-count 1
+
+   # describe
+   aws kinesis describe-stream-summary --stream-name $STREAM_NAME
+
+   # list
+   aws kinesis list-streams
+----
+
+
+== Configuration
+
+Configuration of the resource requires all of the following parameters:
+
+|===
+|Property |Required |Description |Type |Default
+
+.^|streamName
+^.^|X
+|Name of the AWS Kinesis stream.
+^.^|string
+^.^|-
+
+.^|regionName
+^.^|X
+|AWS Region where the Kinesis stream is hosted.
+^.^|string
+^.^|-
+
+.^|awsAccessKeyId
+^.^|X
+|Access key for IAM account with privileges to write to the Kinesis stream.
+^.^|string
+^.^|-
+
+.^|awsSecretAccessKey
+^.^|X
+|Secret key for IAM account with privileges to write to the Kinesis stream.
+^.^|string
+^.^|-
+
+|===
+
+
+[source, json]
+.Configuration example
+----
+{
+    "configuration": {
+       "streamName" : "myKinesisStream",
+       "regionName" : "us-east-1",
+       "awsAccessKeyId" : "AAAAAAAAAAAAAAAAAAA",
+       "awsSecretAccessKey" : "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB"
+    }
+}
+----
+
