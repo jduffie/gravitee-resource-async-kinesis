@@ -2,44 +2,28 @@
   "type" : "object",
   "id" : "urn:jsonschema:io:gravitee:resource:async:kinesis:KinesisResourceConfiguration",
   "properties" : {
-    "kinesisConfiguration" : {
-      "title": "Kinesis client configuration",
-      "type" : "string",
-      "x-schema-form": {
-        "type": "codemirror",
-        "codemirrorOptions": {
-          "placeholder": "Place your Kinesis client configuration here.",
-          "lineWrapping": true,
-          "lineNumbers": true,
-          "allowDropFileTypes": true,
-          "autoCloseTags": true,
-          "mode": "javascript"
-        }
-      }
-    },
     "streamName" : {
       "title": "Stream Name",
       "description": "stream name",
-      "type": "string",
-      "default": ""
+      "type": "string"
     },
     "regionName" : {
       "title": "regionName Name",
       "description": "regionName name",
-      "type": "string",
-      "default": ""
+      "type": "string"
     },
     "awsAccessKeyId" : {
       "title": "awsAccessKeyId Name",
       "description": "awsAccessKeyId name",
-      "type": "string",
-      "default": ""
+      "type": "string"
     },
     "awsSecretAccessKey" : {
       "title": "awsSecretAccessKey Name",
       "description": "awsSecretAccessKey name",
       "type": "string",
-      "default": ""
+      "x-schema-form": {
+        "type": "password"
+      }
     }
   },
   "required": [
