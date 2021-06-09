@@ -30,6 +30,7 @@ import org.slf4j.LoggerFactory;
 
 @SuppressWarnings("unused")
 public class KinesisResource extends AsyncResource<KinesisResourceConfiguration, UserRecordResult> {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(KinesisResource.class);
 
     private KinesisProducer kinesisProducer;
@@ -55,13 +56,14 @@ public class KinesisResource extends AsyncResource<KinesisResourceConfiguration,
     }
 
     private static KinesisProducer createProducer(KinesisResourceRuntimeConfiguration kinesisPolicyConfiguration) {
-        BasicAWSCredentials awsCreds = new BasicAWSCredentials(kinesisPolicyConfiguration.getAwsAccessKeyId(),
-                kinesisPolicyConfiguration.getAwsSecretAccessKey());
+        BasicAWSCredentials awsCreds = new BasicAWSCredentials(
+            kinesisPolicyConfiguration.getAwsAccessKeyId(),
+            kinesisPolicyConfiguration.getAwsSecretAccessKey()
+        );
         KinesisProducerConfiguration kinesisProducerConfiguration = new KinesisProducerConfiguration();
         kinesisProducerConfiguration
-                .setRegion(kinesisPolicyConfiguration.getRegionName())
-                .setCredentialsProvider(new AWSStaticCredentialsProvider(awsCreds));
+            .setRegion(kinesisPolicyConfiguration.getRegionName())
+            .setCredentialsProvider(new AWSStaticCredentialsProvider(awsCreds));
         return new KinesisProducer(kinesisProducerConfiguration);
     }
-
 }

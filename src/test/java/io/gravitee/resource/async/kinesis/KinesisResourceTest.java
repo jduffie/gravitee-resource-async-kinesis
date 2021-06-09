@@ -20,13 +20,8 @@ import org.junit.Test;
 public class KinesisResourceTest {
 
     @Test
-    public void testOnStart() throws Exception {
-
-    }
+    public void testOnStart() throws Exception {}
 
     @Test
-    public void testOnStop() throws Exception {
-
-    }
-
+    public void testOnStop() throws Exception {}
 }

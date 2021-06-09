@@ -16,5 +16,8 @@
 package io.gravitee.resource.async.kinesis;
 
 public enum PolicyScope {
-    REQUEST, RESPONSE, REQUEST_CONTENT, RESPONSE_CONTENT
+    REQUEST,
+    RESPONSE,
+    REQUEST_CONTENT,
+    RESPONSE_CONTENT,
 }

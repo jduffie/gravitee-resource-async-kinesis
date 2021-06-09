@@ -20,33 +20,32 @@ import io.gravitee.gateway.api.ExecutionContext;
 public class KinesisResourceRuntimeConfigurationUtil {
 
     public static String decodeRegionName(ExecutionContext context, KinesisResourceConfiguration configuration) {
-        return context.getTemplateEngine()
-                .getValue(configuration.getRegionName(), String.class);
+        return context.getTemplateEngine().getValue(configuration.getRegionName(), String.class);
     }
 
     public static String decodeStreamName(ExecutionContext context, KinesisResourceConfiguration configuration) {
-        return context.getTemplateEngine()
-                .getValue(configuration.getStreamName(), String.class);
+        return context.getTemplateEngine().getValue(configuration.getStreamName(), String.class);
     }
 
     public static String decodeAwsSecretAccessKey(ExecutionContext context, KinesisResourceConfiguration configuration) {
-        return context.getTemplateEngine()
-                .getValue(configuration.getAwsSecretAccessKey(), String.class);
+        return context.getTemplateEngine().getValue(configuration.getAwsSecretAccessKey(), String.class);
     }
 
     public static String decodeAwsAccessKeyId(ExecutionContext context, KinesisResourceConfiguration configuration) {
-        return context.getTemplateEngine()
-                .getValue(configuration.getAwsAccessKeyId(), String.class);
+        return context.getTemplateEngine().getValue(configuration.getAwsAccessKeyId(), String.class);
     }
 
-    public static KinesisResourceRuntimeConfiguration getRuntimeConfiguration(ExecutionContext context,
-                                                                              KinesisResourceConfiguration configuration) {
-        return KinesisResourceRuntimeConfiguration.builder()
-                .scope(configuration.getScope())
-                .regionName(decodeRegionName(context, configuration))
-                .streamName(decodeStreamName(context, configuration))
-                .awsAccessKeyId(decodeAwsAccessKeyId(context, configuration))
-                .awsSecretAccessKey(decodeAwsSecretAccessKey(context, configuration))
-                .build();
+    public static KinesisResourceRuntimeConfiguration getRuntimeConfiguration(
+        ExecutionContext context,
+        KinesisResourceConfiguration configuration
+    ) {
+        return KinesisResourceRuntimeConfiguration
+            .builder()
+            .scope(configuration.getScope())
+            .regionName(decodeRegionName(context, configuration))
+            .streamName(decodeStreamName(context, configuration))
+            .awsAccessKeyId(decodeAwsAccessKeyId(context, configuration))
+            .awsSecretAccessKey(decodeAwsSecretAccessKey(context, configuration))
+            .build();
     }
 }

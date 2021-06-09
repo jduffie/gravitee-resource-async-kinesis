@@ -24,6 +24,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class KinesisResourceRuntimeConfiguration implements ResourceConfiguration {
+
     private PolicyScope scope = PolicyScope.REQUEST;
     private String streamName;
     private String regionName;
@@ -32,14 +33,25 @@ public class KinesisResourceRuntimeConfiguration implements ResourceConfiguratio
 
     @Override
     public String toString() {
-        return "KinesisResourceConfiguration{" +
-                "scope=" + this.getScope() +
-                ", streamName='" + this.getStreamName() + '\'' +
-                ", regionName='" + this.getRegionName() + '\'' +
-                ", awsAccessKeyId='" + this.getAwsAccessKeyId().substring(0, 3) + '\'' +
-                // TODO: nuke this once we validate the plugin configuration from browser
-                ", awsSecretAccessKey='" + this.getAwsSecretAccessKey() + '\'' +
-                '}';
+        return (
+            "KinesisResourceConfiguration{" +
+            "scope=" +
+            this.getScope() +
+            ", streamName='" +
+            this.getStreamName() +
+            '\'' +
+            ", regionName='" +
+            this.getRegionName() +
+            '\'' +
+            ", awsAccessKeyId='" +
+            this.getAwsAccessKeyId().substring(0, 3) +
+            '\'' +
+            // TODO: nuke this once we validate the plugin configuration from browser
+            ", awsSecretAccessKey='" +
+            this.getAwsSecretAccessKey() +
+            '\'' +
+            '}'
+        );
     }
 
     public PolicyScope getScope() {
@@ -81,5 +93,4 @@ public class KinesisResourceRuntimeConfiguration implements ResourceConfiguratio
     public void setAwsSecretAccessKey(String awsSecretAccessKey) {
         this.awsSecretAccessKey = awsSecretAccessKey;
     }
-
 }

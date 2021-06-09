@@ -32,14 +32,25 @@ public class KinesisResourceConfiguration implements ResourceConfiguration {
 
     @Override
     public String toString() {
-        return "KinesisResourceConfiguration{" +
-                "scope=" + this.getScope() +
-                ", streamName='" + this.getStreamName() + '\'' +
-                ", regionName='" + this.getRegionName() + '\'' +
-                ", awsAccessKeyId='" + this.getAwsAccessKeyId().substring(0, 3) + '\'' +
-                // TODO: nuke this once we validate the plugin configuration from browser
-                ", awsSecretAccessKey='" + this.getAwsSecretAccessKey() + '\'' +
-                '}';
+        return (
+            "KinesisResourceConfiguration{" +
+            "scope=" +
+            this.getScope() +
+            ", streamName='" +
+            this.getStreamName() +
+            '\'' +
+            ", regionName='" +
+            this.getRegionName() +
+            '\'' +
+            ", awsAccessKeyId='" +
+            this.getAwsAccessKeyId().substring(0, 3) +
+            '\'' +
+            // TODO: nuke this once we validate the plugin configuration from browser
+            ", awsSecretAccessKey='" +
+            this.getAwsSecretAccessKey() +
+            '\'' +
+            '}'
+        );
     }
 
     public PolicyScope getScope() {
@@ -81,5 +92,4 @@ public class KinesisResourceConfiguration implements ResourceConfiguration {
     public void setAwsSecretAccessKey(String awsSecretAccessKey) {
         this.awsSecretAccessKey = awsSecretAccessKey;
     }
-
 }
