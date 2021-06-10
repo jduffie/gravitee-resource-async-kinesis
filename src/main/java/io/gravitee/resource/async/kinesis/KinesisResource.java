@@ -25,6 +25,7 @@ import io.gravitee.resource.async.api.AsyncHash;
 import io.gravitee.resource.async.api.AsyncMessage;
 import io.gravitee.resource.async.api.AsyncResource;
 import io.gravitee.resource.async.api.AsyncResourceResult;
+import java.nio.charset.StandardCharsets;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,7 +41,8 @@ public class KinesisResource extends AsyncResource<KinesisResourceConfiguration,
     protected void doStart() throws Exception {
         super.doStart();
         LOGGER.info("Initializing resource");
-        this.runtimeConfiguration = KinesisResourceRuntimeConfigurationUtil.getRuntimeConfiguration(null, configuration());
+        // this.runtimeConfiguration = KinesisResourceRuntimeConfigurationUtil.getRuntimeConfiguration(null, configuration());
+        this.runtimeConfiguration = KinesisResourceRuntimeConfigurationUtil.getRuntimeConfiguration(configuration());
         this.kinesisProducer = createProducer(this.runtimeConfiguration);
     }
 
@@ -52,7 +54,8 @@ public class KinesisResource extends AsyncResource<KinesisResourceConfiguration,
 
     @Override
     public void publish(AsyncMessage asyncMessage, AsyncHash asyncHash, Handler<AsyncResourceResult> handler) {
-        LOGGER.info("publishing");
+        String msg = new String(asyncMessage.getBuffer().getBytes(), StandardCharsets.UTF_8);
+        LOGGER.info("publishing: {}", msg);
     }
 
     private static KinesisProducer createProducer(KinesisResourceRuntimeConfiguration kinesisPolicyConfiguration) {

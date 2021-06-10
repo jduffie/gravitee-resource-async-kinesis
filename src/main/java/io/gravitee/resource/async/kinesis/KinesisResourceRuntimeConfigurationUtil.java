@@ -48,4 +48,15 @@ public class KinesisResourceRuntimeConfigurationUtil {
             .awsSecretAccessKey(decodeAwsSecretAccessKey(context, configuration))
             .build();
     }
+
+    public static KinesisResourceRuntimeConfiguration getRuntimeConfiguration(KinesisResourceConfiguration configuration) {
+        return KinesisResourceRuntimeConfiguration
+            .builder()
+            .scope(configuration.getScope())
+            .regionName(configuration.getRegionName())
+            .streamName(configuration.getStreamName())
+            .awsAccessKeyId(configuration.getAwsAccessKeyId())
+            .awsSecretAccessKey(configuration.getAwsSecretAccessKey())
+            .build();
+    }
 }
