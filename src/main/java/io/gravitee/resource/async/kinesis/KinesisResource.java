@@ -54,6 +54,8 @@ public class KinesisResource extends AsyncResource<KinesisResourceConfiguration,
 
     @Override
     public void publish(AsyncMessage asyncMessage, AsyncHash asyncHash, Handler<AsyncResourceResult> handler) {
+        LOGGER.info("publishing: config {}", configuration());
+        LOGGER.info("publishing: runtime config {}", this.runtimeConfiguration);
         String msg = new String(asyncMessage.getBuffer().getBytes(), StandardCharsets.UTF_8);
         LOGGER.info("publishing: {}", msg);
     }
